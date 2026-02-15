@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dollar To Jew</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("Flag_of_Israel.png");
+    background-size: 10% auto
+  }
+
+  .app {
+    max-width: 900px;
+    margin: 60px auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  .header {
+    padding: 18px 24px;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .converter {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    align-items: center;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .label {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+
+  textarea {
+    width: 100%;
+    height: 120px;
+    border: none;
+    resize: none;
+    font-size: 28px;
+    outline: none;
+    font-weight: 500;
+  }
+
+  .swap {
+    text-align: center;
+  }
+
+  .swap button {
+    padding: 10px 14px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: white;
+  }
+
+  .rate {
+    padding: 14px 24px;
+    font-size: 14px;
+    color: #666;
+    border-top: 1px solid #e0e0e0;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="app">
+<style>
+  .header {
+    /* Base "stroke" for all letters */
+    -webkit-text-stroke: 1.5px black;
+    color: transparent;
+    font-family: sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+  }
+
+  /* Targets every second span (even letters) */
+  .header span:nth-child(odd) {
+    color: rgb(0, 94, 184); /* The specific blue requested */
+  }
+</style>
+
+<div class="header">
+  <span>D</span><span>o</span><span>l</span><span>l</span><span>a</span><span>r</span><span> T</span><span>o</span><span> J</span><span>e</span><span>w</span>
+</div>
+
+  <div class="converter">
+    <div class="panel">
+      <div class="label" id="leftLabel">US Dollars</div>
+      <textarea id="leftInput" placeholder="Enter amount"></textarea>
+    </div>
+
+    <div class="swap">
+      <button onclick="swap()">⇄</button>
+    </div>
+
+    <div class="panel">
+      <div class="label" id="rightLabel">Jews</div>
+      <textarea id="rightInput" placeholder="Converted amount" readonly></textarea>
+    </div>
+  </div>
+
+  <div class="rate">1 Jew = $67,020,000 USD</div>
+</div>
+
+<script>
+const RATE = 67020000;
+
+let mode = "USD_TO_JEW";
+
+const leftInput = document.getElementById("leftInput");
+const rightInput = document.getElementById("rightInput");
+const leftLabel = document.getElementById("leftLabel");
+const rightLabel = document.getElementById("rightLabel");
+
+leftInput.addEventListener("input", convert);
+
+function convert() {
+  const value = parseFloat(leftInput.value);
+  if (isNaN(value)) {
+    rightInput.value = "";
+    return;
+  }
+
+  if (mode === "USD_TO_JEW") {
+    rightInput.value = (value / RATE).toFixed(6);
+  } else {
+    rightInput.value = (value * RATE).toLocaleString();
+  }
+}
+
+function swap() {
+  if (mode === "USD_TO_JEW") {
+    mode = "JEW_TO_USD";
+    leftLabel.textContent = "Jews";
+    rightLabel.textContent = "US Dollars";
+  } else {
+    mode = "USD_TO_JEW";
+    leftLabel.textContent = "US Dollars";
+    rightLabel.textContent = "Jews";
+  }
+
+  leftInput.value = "";
+  rightInput.value = "";
+  leftInput.focus();
+}
+</script>
+
+</body>
+</html>
